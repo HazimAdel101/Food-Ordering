@@ -10,7 +10,17 @@ class AdminController extends Controller
 {
     public function AdminDashboard()
     {
-        return view("admin.index");
+
+        $username = Auth::User()->username;
+        $welcome = array(
+            'message' => 'Welcome ' . $username,
+            'alert-type' => 'success',
+        );
+
+        $userCount = User::where('role', 'user')->count();
+        $supplierCount = User::where('role', 'supplier')->count();
+
+        return view("admin.index", compact("welcome", "userCount", "supplierCount"));
     }
 
     public function Users()

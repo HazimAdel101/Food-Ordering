@@ -1,6 +1,6 @@
 <nav class="sidebar">
     <div class="sidebar-header">
-        <a href="#" class="sidebar-brand">
+        <a href="{{route('admin.dashboard')}}" class="sidebar-brand">
             Fast<span>Orders</span>
         </a>
         <div class="sidebar-toggler not-active">
