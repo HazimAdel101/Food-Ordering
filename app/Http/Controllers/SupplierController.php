@@ -7,26 +7,27 @@ use Illuminate\Http\Request;
 
 class SupplierController extends Controller
 {
-
-    public function SupplierDashboard(){
-        return view("supplier.supplier_dashboard");
-    }
-    /**
-     * Display a listing of the resource.
-     */
-
-
     public function index()
     {
-        //
-    }
+        try {
+            $suppliers = Supplier::all();
 
-    /**
-     * Show the form for creating a new resource.
-     */
+            return view('admin.supplier.suppliers', compact('suppliers'));
+        } catch (\Exception $e) {
+            \Log::error($e);
+
+            return redirect()->route('admin.dashboard')->with('error', 'An error occurred while retrieving suppliers.');
+        }
+    }
     public function create()
     {
-        //
+        try {
+            return view('admin.supplier.create');
+        } catch (\Exception $e) {
+            \Log::error($e);
+
+            return redirect()->route('admin.dashboard')->with('error', 'An error occurred while retrieving suppliers.');
+        }
     }
 
     /**
@@ -34,7 +35,23 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $data = $request->validate([
+                "name"=> "required",
+                "username"=> "required|unique:suppliers,username",
+                "email"=> "required|email|unique:suppliers,email",
+                "password"=> "required|min:6",
+                "photo"=> "nullable|image|max:2048",
+                "phone"=> "nullable|string|max:20",
+                "address"=> "nullable|string",
+            ]);
+
+            $newSupplier = Supplier::create($data);
+            return redirect(route("admin.suppliers"));
+        } catch (\Exception $e) {
+            \Log::error($e);
+            return redirect()->route('admin.dashboard')->with('error', 'An error occurred while retrieving suppliers.');
+        }
     }
 
     /**
@@ -50,7 +67,12 @@ class SupplierController extends Controller
      */
     public function edit(Supplier $supplier)
     {
-        //
+        try{
+            return view('admin.supplier.edit', compact('supplier'));
+        }catch(\Exception $e){
+            \Log::error($e);
+            return redirect(route('admin.suppliers'))->with('error', 'there is an error displaying  this supplier');
+        }
     }
 
     /**
@@ -58,14 +80,29 @@ class SupplierController extends Controller
      */
     public function update(Request $request, Supplier $supplier)
     {
-        //
+        $data = $request->validate([
+            "name"=> "required",
+            "username"=> "required",
+            "email"=> "required|email",
+            "password"=> "required|min:6",
+            "photo"=> "nullable|image|max:2048",
+            "phone"=> "nullable|string|max:20",
+            "address"=> "nullable|string",
+        ]);
+
+        $supplier->update($data);
+
+        return  redirect(route('admin.suppliers'))->with('success', 'Supplier updated Successfully');
+
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Supplier $supplier)
+    public function delete(Supplier $supplier)
     {
-        //
+        $supplier->delete();
+        return  redirect(route('admin.suppliers'))->with('success', 'Supplier deleted Successfully');
     }
 }

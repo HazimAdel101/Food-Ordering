@@ -42,15 +42,24 @@
 
 <body>
     <div class="main-wrapper">
+
+
         <!-- partial:partials/_sidebar.html -->
         @include('admin.body.sidebar')
         <!-- partial -->
         <div class="page-wrapper">
+
             <!-- partial:partials/_navbar.html -->
             @include('admin.body.header')
+
+
             <!-- partial -->
             @yield('admin')
             @yield('users')
+            @yield('suppliers')
+            @yield('newSupplier')
+
+
             <!-- partial:partials/_footer.html -->
             @include('admin.body.footer')
             <!-- partial -->

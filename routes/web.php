@@ -27,7 +27,17 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
 
-    Route::get('/admin/dashboard/users', [AdminController::class, 'Users'])->name('admin.dashboard.users');
+    Route::get('/admin/dashboard/users', [AdminController::class, 'Users'])->name('admin.users');
+
+    // Supplier
+    Route::get('/admin/dashboard/suppliers', [SupplierController::class, 'index'])->name('admin.suppliers');
+    Route::get('/admin/dashboard/suppliers/create', [SupplierController::class, 'create'])->name('admin.supplier.create');
+    Route::post('/admin/dashboard/suppliers', [SupplierController::class, 'store'])->name('admin.supplier.store');
+    Route::get('/admin/dashboard/suppliers/{supplier}', [SupplierController::class, 'edit'])->name('admin.supplier.edit');
+    Route::put('/admin/dashboard/suppliers/{supplier}/update', [SupplierController::class, 'update'])->name('admin.supplier.update');
+    Route::delete('/admin/dashboard/suppliers/{supplier}/delete', [SupplierController::class, 'delete'])->name('admin.supplier.delete');
+
+
 
     Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
 });
