@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Supplier>
  */
-class UserFactory extends Factory
+class SupplierFactory extends Factory
 {
 
     protected static ?string $password;
@@ -30,7 +30,6 @@ class UserFactory extends Factory
             'phone' => fake()->phoneNumber,
             'address' => fake()->address,
             'photo' => fake()->imageUrl('60', '60'),
-            'role' => fake()->randomElement(['supplier', 'user']),
             'status' => fake()->randomElement(['active','inactive']),
             'remember_token' => Str::random(10),
         ];
