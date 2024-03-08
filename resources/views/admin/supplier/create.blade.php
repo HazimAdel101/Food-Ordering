@@ -3,7 +3,7 @@
     <div class="h-100 p-5 m-5">
         <div class="container py-5">
             <h1 class="mb-4">New Supplier</h1>
-            <form method="POST" action="{{route('admin.supplier.store')}}">
+            <form method="POST" action="{{route('admin.supplier.store')}}" enctype="multipart/form-data">
                 @csrf
                 @method('post')
                 @if ($errors->any())

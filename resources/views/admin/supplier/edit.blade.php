@@ -1,5 +1,5 @@
 @extends('admin.admin_dashboard')
-@section('newSupplier')
+@section('editSupplier')
     <div class="h-100 p-5 m-5">
         <div class="container py-5">
             <h1 class="mb-4">Edit Supplier</h1>

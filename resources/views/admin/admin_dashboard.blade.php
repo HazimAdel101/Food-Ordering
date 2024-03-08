@@ -58,6 +58,11 @@
             @yield('users')
             @yield('suppliers')
             @yield('newSupplier')
+            @yield('editSupplier')
+            @yield('restaurants')
+            @yield('newRestaurant')
+            @yield('editRestaurant')
+
 
 
             <!-- partial:partials/_footer.html -->

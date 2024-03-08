@@ -80,10 +80,10 @@
                 <div class="collapse" id="restaurant">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="{{ route('admin.users') }}" class="nav-link">All Restaurants</a>
+                            <a href="{{ route('admin.restaurants') }}" class="nav-link">All Restaurants</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Users Orders</a>
+                            <a href="{{ route('admin.restaurant.create') }}" class="nav-link">Add Restaurant</a>
                         </li>
                     </ul>
                 </div>

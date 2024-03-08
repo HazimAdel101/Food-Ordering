@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,8 +38,16 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/admin/dashboard/suppliers/{supplier}/update', [SupplierController::class, 'update'])->name('admin.supplier.update');
     Route::delete('/admin/dashboard/suppliers/{supplier}/delete', [SupplierController::class, 'delete'])->name('admin.supplier.delete');
 
+    // Restaurant
 
+    Route::get('/admin/dashboard/restaurants', [RestaurantController::class, 'index'])->name('admin.restaurants');
+    Route::get('/admin/dashboard/restaurants/create', [RestaurantController::class, 'create'])->name('admin.restaurant.create');
+    Route::post('/admin/dashboard/restaurants', [RestaurantController::class, 'store'])->name('admin.restaurant.store');
+    Route::get('/admin/dashboard/restaurants/{restaurant}', [RestaurantController::class, 'edit'])->name('admin.restaurant.edit');
+    Route::put('/admin/dashboard/restaurants/{restaurant}/update', [RestaurantController::class, 'update'])->name('admin.restaurant.update');
+    Route::delete('/admin/dashboard/restaurants/{restaurant}/delete', [RestaurantController::class, 'delete'])->name('admin.restaurant.delete');
 
+    // Logout
     Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
 });
 
