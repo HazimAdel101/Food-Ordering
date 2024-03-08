@@ -9,6 +9,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class AuthenticatedSessionController extends Controller
 {
@@ -25,6 +27,8 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+
+        // dd($request);
         $request->authenticate();
 
         $request->session()->regenerate();
@@ -38,6 +42,10 @@ class AuthenticatedSessionController extends Controller
         } else {
             $url = 'dashboard';
         }
+
+        $name = $request->input('login');
+
+        Alert::success('You are logged in', 'Welcome back '. $name);
 
         return redirect()->intended($url);
     }

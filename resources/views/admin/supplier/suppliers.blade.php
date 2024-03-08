@@ -6,7 +6,7 @@
                 <h1 class="text-xl">All Suppliers</h1>
             </div>
             <div>
-                <a  href="{{route('admin.supplier.create')}}" class="btn btn-primary btn-lg">
+                <a href="{{ route('admin.supplier.create') }}" class="btn btn-primary btn-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-plus-circle" viewBox="0 0 16 16">
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
@@ -35,18 +35,32 @@
                     <td>{{ $supplier->status }}</td>
                     <td>Supplier Deliveries</td>
                     <td>
-                        <a class="" href="{{route('admin.supplier.edit', ['supplier' =>$supplier])}}">
+                        <a class="" href="{{ route('admin.supplier.edit', ['supplier' => $supplier]) }}">
                             <i data-feather="edit-2" class="icon-sm me-2 text-primary"></i>
                         </a>
 
-                        <form class="d-inline" method="POST" action="{{ route('admin.supplier.delete', ['supplier'=>$supplier]) }}">
+                        {{-- <form class="d-inline" method="POST"  action="{{ route('admin.supplier.delete', ['supplier'=>$supplier]) }}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-link">
+                            <button  type="submit" onclick="confirm('Are you sure you want to delete??')"  class="btn btn-link">
                                 <i data-feather="trash" class="icon-sm mx-2 text-danger"></i>
                             </button>
-                        </form>
+                        </form> --}}
+                        <a href="{{ route('admin.supplier.delete', ['supplier' => $supplier]) }}"
+                            onclick="event.preventDefault();
+                                    if (confirm('Are you sure you want to delete?')) {
+                                        document.getElementById('delete-form-{{ $supplier->id }}').submit();
+                                    }"
+                            class="btn btn-link">
+                            <i data-feather="trash" class="icon-sm mx-2 text-danger"></i>
+                        </a>
 
+                        <form id="delete-form-{{ $supplier->id }}"
+                            action="{{ route('admin.supplier.delete', ['supplier' => $supplier]) }}" method="POST"
+                            style="display: none;">
+                            @csrf
+                            @method('delete')
+                        </form>
                     </td>
                 </tr>
             @endforeach
