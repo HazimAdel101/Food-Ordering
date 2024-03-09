@@ -4,8 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\FoodController;
 use Illuminate\Support\Facades\Route;
-
 
 Route::get('/', function () {
     return view('welcome');
@@ -47,6 +47,16 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/admin/dashboard/restaurants/{restaurant}/update', [RestaurantController::class, 'update'])->name('admin.restaurant.update');
     Route::delete('/admin/dashboard/restaurants/{restaurant}/delete', [RestaurantController::class, 'delete'])->name('admin.restaurant.delete');
 
+    // Restaurant Foods
+    Route::get('/admin/dashboard/restaurants/{restaurant}/foods', [FoodController::class, 'index'])->name('admin.restaurant.foods');
+    Route::get('/admin/dashboard/restaurants/{restaurant}/foods/create', [FoodController::class, 'create'])->name('admin.restaurant.food.create');
+    Route::post('/admin/dashboard/restaurants/{restaurant}/foods', [FoodController::class, 'store'])->name('admin.restaurant.food.store');
+    Route::get('/admin/dashboard/restaurants/{restaurant}/{food}', [FoodController::class, 'edit'])->name('admin.restaurant.food.edit');
+    Route::put('/admin/dashboard/restaurants/{restaurant}/{food}/update', [FoodController::class, 'update'])->name('admin.restaurant.food.update');
+    Route::delete('/admin/dashboard/restaurants/{restaurant}/{food}/delete', [FoodController::class, 'delete'])->name('admin.restaurant.food.delete');
+
+
+
     // Logout
     Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
 });
@@ -56,3 +66,5 @@ Route::middleware(['auth', 'role:supplier'])->group(function () {
 
     Route::get('/supplier/dashboard', [SupplierController::class, 'SupplierDashboard'])->name('supplier.dashboard');
 });
+
+

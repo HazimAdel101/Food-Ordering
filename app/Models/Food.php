@@ -9,6 +9,10 @@ class Food extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
+    protected $table = 'foods';
+
     public function restaurant()
     {
         return $this->belongsTo(Restaurant::class);

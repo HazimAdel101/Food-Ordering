@@ -10,13 +10,15 @@ return new class extends Migration {
     {
         Schema::create('foods', function (Blueprint $table) {
             $table->id();
-            $table->text('description')->nullable();
+            $table->string('name');
+            $table->string('photo')->nullable();
             $table->decimal('price', 8, 2);
+            $table->decimal('discount', 8, 2)->default(0);
             $table->foreignId('restaurant_id')->constrained()->onDelete('cascade');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
-
 
     public function down(): void
     {
