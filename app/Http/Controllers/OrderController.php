@@ -17,11 +17,13 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::with(['user', 'food', 'restaurant', 'supplier'])->get();
+        // $orders = Order::with(['user', 'food', 'restaurant', 'supplier'])->get();
 
-        // $orders = Order::all();
+        $orders = Order::all();
 
-        return view("admin.order.orders", compact("orders"));
+        $suppliers = Supplier::all();
+
+        return view("admin.order.orders", compact("orders", "suppliers"));
     }
 
     /**
