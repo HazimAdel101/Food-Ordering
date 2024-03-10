@@ -67,8 +67,9 @@
             @yield('foods')
             @yield('newFood')
             @yield('editFood')
-
-
+            @yield('orders')
+            {{-- @yield('neworder') --}}
+            {{-- @yield('editorder') --}}
 
             <!-- partial:partials/_footer.html -->
             @include('admin.body.footer')

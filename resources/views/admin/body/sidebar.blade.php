@@ -103,10 +103,7 @@
                 <div class="collapse" id="order">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="{{ route('admin.users') }}" class="nav-link">All Orders</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Users Orders</a>
+                            <a href="{{ route('admin.orders') }}" class="nav-link">All Orders</a>
                         </li>
                     </ul>
                 </div>

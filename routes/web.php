@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RestaurantController;
@@ -55,6 +56,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/admin/dashboard/restaurants/{restaurant}/{food}/update', [FoodController::class, 'update'])->name('admin.restaurant.food.update');
     Route::delete('/admin/dashboard/restaurants/{restaurant}/{food}/delete', [FoodController::class, 'delete'])->name('admin.restaurant.food.delete');
 
+    // Orders
+    Route::get('/admin/dashboard/orders', [OrderController::class, 'index'])->name('admin.orders');
 
 
     // Logout
@@ -66,5 +69,3 @@ Route::middleware(['auth', 'role:supplier'])->group(function () {
 
     Route::get('/supplier/dashboard', [SupplierController::class, 'SupplierDashboard'])->name('supplier.dashboard');
 });
-
-
